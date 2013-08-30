@@ -49,28 +49,26 @@
 	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***********************************************************************************/
 
-package net.dechelle.jlogo;
+package net.dechelle.jlogo.primitives;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-public class PrimitiveMap {
+import net.dechelle.jlogo.LogoInterpreter;
+import net.dechelle.jlogo.Primitive;
 
-	private Map<String, Primitive> map;
-	
-	public PrimitiveMap()
+public class RightTurnPrimitive implements Primitive {
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public Object execute(LogoInterpreter interpreter, List args)
 	{
-		map = new HashMap<String, Primitive>();
-	}
-	
-	public Primitive get(String name)
-	{
-		return map.get(name);
-	}
-	
-	public void put(String name, Primitive primitive)
-	{
-		map.put(name, primitive);
+		//double d = (Double)args.get(0);
+		
+		double d = Double.valueOf((String) args.get(0));
+		
+		interpreter.getTurtle().rightTurn(d);
+		
+		return d;
 	}
 
 }

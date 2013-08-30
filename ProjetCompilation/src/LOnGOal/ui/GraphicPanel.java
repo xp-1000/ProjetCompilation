@@ -1,4 +1,4 @@
-package LOngGOal.ui;
+package LOnGOal.ui;
 
 
 import java.awt.Color;
@@ -9,10 +9,9 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.beans.Transient;
 
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.swing.border.BevelBorder;
 
+@SuppressWarnings("serial")
 public class GraphicPanel extends JPanel
 {
 	private Dimension dimension;

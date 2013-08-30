@@ -53,19 +53,23 @@ package net.dechelle.jlogo;
 
 import java.util.List;
 
-import net.dechelle.jlogo.primitives.AllPrimitives;
 import net.dechelle.jlogo.ui.JLogoPanel;
+
+import LOnGOal.parser.Primitive;
+import LOnGOal.parser.PrimitiveMap;
+
 
 public class LogoInterpreter {
 
 	private Turtle turtle;
 	private PrimitiveMap primitives;
 	
-	public LogoInterpreter(JLogoPanel ui)
+	public LogoInterpreter(JLogoPanel ui, PrimitiveMap map)
 	{
 		turtle = new Turtle(ui);
-		primitives = new PrimitiveMap();
-		AllPrimitives.init(primitives);
+		//primitives = new PrimitiveMap();
+		this.primitives = map;
+		//AllPrimitives.init(primitives);
 	}
 
 	public Turtle getTurtle()

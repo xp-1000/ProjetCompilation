@@ -49,146 +49,26 @@
 	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ***********************************************************************************/
 
-package net.dechelle.jlogo;
+package net.dechelle.jlogo.primitives;
 
-import java.awt.Color;
+import java.util.List;
 
-import net.dechelle.jlogo.ui.JLogoPanel;
+import net.dechelle.jlogo.LogoInterpreter;
+import net.dechelle.jlogo.Primitive;
 
-public class Turtle {
+public class LeftTurnPrimitive implements Primitive {
 
-	enum TurtleState {
-		PEN_UP,
-		PEN_DOWN,
-	};
-
-	private TurtleState state;
-	private double prevX, prevY;
-	private double x, y;
-	private double theta;
-	private Color penColor;
-	private JLogoPanel ui;
-
-	public Turtle(JLogoPanel ui)
-	{
-		state = TurtleState.PEN_DOWN;
-		prevX = 0.0;
-		prevY = 0.0;
-		x = 0.0;
-		y = 0.0;
-		theta = 0.0;
-		penColor = Color.BLACK;
-		// Pour partir vers le haut
-		leftTurn(90);
-		this.ui = ui;
-	}
-	
-	private void move(double r, double sign)
-	{
-	    prevX = x;
-	    prevY = y;
-	    x += sign * r * Math.cos(theta);
-	    y += sign * r * Math.sin(theta);
-
-	    if (state == TurtleState.PEN_DOWN)
-	    	ui.drawLine(penColor, prevX, prevY, x, y);
-	}
-	
-	public void forward(double r)
-	{
-		move(r, 1.0);
-	}
-
-	public void backward(double r)
-	{
-		move(r, -1.0);
-	}
-	
-	private void turn(double alpha, double sign)
-	{
-		theta += sign * 2.0 * Math.PI * alpha / 360.0;
-	}
-	   
-	public void rightTurn(double alpha)
-	{
-		turn(alpha, 1.0);
-	}
-
-	public void leftTurn(double alpha)
-	{
-		turn(alpha, -1.0);
-	}
-
-	public void penUp()
-	{
-		state = TurtleState.PEN_UP;
-	}
-
-	public void penDown()
-	{
-		state = TurtleState.PEN_DOWN;
-	}
-
-	public void origin()
-	{
-		prevX = 0.0;
-		prevY = 0.0;
-		x = 0.0;
-		y = 0.0;
-	}
-	
-	public void reInit()
-	{
-		origin();
-		clear();
-	}
-	
-	public void clear()
-	{
-		System.out.println("clear");
-		ui.clear();
-
-	}
-
-	public void changePenColor(int rgb)
-	{
-		penColor = translateColor(rgb);
-	//	penColor = Color.red;
-	}
-
-	public void changeBackgroundColor(int rgb)
-	{
-		penColor = translateColor(rgb);
-		ui.changeBackground(penColor);
-		//ui.updateUI();
-	}
-	
-	private Color translateColor(int rgb)
-	{
-		switch(rgb)
-		{
-		case 0: 
-			return Color.black;
-		case 1: 
-			return Color.blue;
-		case 2: 
-			return Color.red;
-		case 3: 
-			return Color.green;
-		case 4: 
-			return Color.yellow;
-		case 5: 
-			return Color.MAGENTA;
-		default :
-			return Color.black;
-		}
-	}
-	
+	@SuppressWarnings("rawtypes")
 	@Override
-	public String toString() {
-		return "Turtle [state=" + state + ", prevX=" + prevX + ", prevY="
-				+ prevY + ", x=" + x + ", y=" + y + ", theta=" + theta
-				+ ", penColor=" + penColor + "]";
+	public Object execute(LogoInterpreter interpreter, List args)
+	{
+		//double d = (Double)args.get(0);
+		
+		double d = Double.valueOf((String) args.get(0));
+		
+		interpreter.getTurtle().leftTurn(d);
+		
+		return d;
 	}
 
 }

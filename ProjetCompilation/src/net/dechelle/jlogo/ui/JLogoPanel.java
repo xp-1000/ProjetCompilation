@@ -127,6 +127,48 @@ public class JLogoPanel extends JPanel {
 
 		return img;
 	}
+	
+	private Image newImage(Color color)
+	{
+		int offScreenWidth = (offScreen != null) ? offScreen.getWidth(this) : 0;
+		int newWidth = Math.max(getWidth(), offScreenWidth);
+		int offScreenHeight = (offScreen != null) ? offScreen.getHeight(this) : 0;
+		int newHeight = Math.max(getHeight(), offScreenHeight);
+
+		Image img = createImage(newWidth, newHeight);
+		Graphics g = img.getGraphics();
+
+		g.setColor(color);
+		g.fillRect(0, 0, newWidth, newHeight);
+
+		if (offScreen != null) {
+			int prevWidth = offScreen.getWidth(this);
+			int x = (newWidth - prevWidth) / 2;
+			int prevHeight = offScreen.getHeight(this);
+			int y = (newHeight - prevHeight) / 2;
+
+			g.drawImage(offScreen, x, y, this);
+			g.dispose();
+		}
+
+		repaint();
+
+		return img;
+	}
+	
+	public void clear()
+	{
+		offScreen = null;
+		offScreen = newImage();
+	}
+	
+	public void changeBackground(Color color)
+	{
+		System.out.println("change background");
+		//super.setBackground(bg);
+		offScreen = null;
+		offScreen = newImage(color);
+	}
 
 	private Image getImage()
 	{
