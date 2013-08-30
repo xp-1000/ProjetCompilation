@@ -78,8 +78,7 @@ public class Turtle {
 		y = 0.0;
 		theta = 0.0;
 		penColor = Color.BLACK;
-		// Pour partir vers le haut
-		leftTurn(90);
+		
 		this.ui = ui;
 	}
 	
@@ -111,12 +110,12 @@ public class Turtle {
 	   
 	public void rightTurn(double alpha)
 	{
-		turn(alpha, 1.0);
+		turn(alpha, -1.0);
 	}
 
 	public void leftTurn(double alpha)
 	{
-		turn(alpha, -1.0);
+		turn(alpha, 1.0);
 	}
 
 	public void penUp()
@@ -136,52 +135,21 @@ public class Turtle {
 		x = 0.0;
 		y = 0.0;
 	}
-	
-	public void reInit()
-	{
-		origin();
-		clear();
-	}
-	
+
 	public void clear()
 	{
-		System.out.println("clear");
-		ui.clear();
 
 	}
 
 	public void changePenColor(int rgb)
 	{
-		penColor = translateColor(rgb);
-	//	penColor = Color.red;
+		penColor = new Color(rgb);
 	}
 
 	public void changeBackgroundColor(int rgb)
 	{
-		penColor = translateColor(rgb);
-		ui.changeBackground(penColor);
-		//ui.updateUI();
-	}
-	
-	private Color translateColor(int rgb)
-	{
-		switch(rgb)
-		{
-		case 0: 
-			return Color.black;
-		case 1: 
-			return Color.blue;
-		case 2: 
-			return Color.red;
-		case 3: 
-			return Color.green;
-		case 4: 
-			return Color.yellow;
-		case 5: 
-			return Color.MAGENTA;
-		default :
-			return Color.black;
-		}
+		penColor = new Color(rgb);
+		ui.setBackground(penColor);
 	}
 	
 	@Override
